@@ -12,7 +12,6 @@ pixel>threshold = 1 else 0
 def binImage(img_path, threshold=140):
     img = np.array(Image.open(img_path).convert('L'))
 
-    print(img)
 
     rows, cols = img.shape
     for i in range(rows):
@@ -22,9 +21,14 @@ def binImage(img_path, threshold=140):
             else:
                 img[i, j] = 1
 
+    img_result = img
+    for i in range(rows):
+        for j in range(cols):
+            if sumNei(img, i, j) < 3:
+                img_result[i, j] = 0
+
     plt.imshow(img, cmap='gray')
     plt.show()
-
 
 # def removeNoise(imgArray):
 
