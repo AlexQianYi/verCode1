@@ -1,124 +1,171 @@
 from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 img_path = './verPic/1image.jpg'
+file_origin = './VerPic'
+file_destin = './BinPic'
 
 
 """
 binary image grey
 pixel>threshold = 1 else 0
 """
-def binImage(img_path, threshold=140):
-    img = np.array(Image.open(img_path).convert('L'))
+def binImage(image):
+    imgry = image.convert('L')
+
+    table = get_bin_table()
+    out = imgry.point(table, '1')
+
+    noise_list = []
+    for i in range(out.width):
+        for j in range(out.height):
+            num9 = sumNei(out, i, j)
+            if num9<3 and out.getpixel((i, j)) ==0:
+                pos = (i, j)
+                noise_list.append(pos)
+
+    remove_noise_pixel(out, noise_list)
+    return out
 
 
-    rows, cols = img.shape
-    for i in range(rows):
-        for j in range(cols):
-            if (img[i, j] <= threshold):
-                img[i, j] = 0
-            else:
-                img[i, j] = 1
+def get_bin_table(threshold=170):
+    table = []
+    for i in range(256):
+        if i<threshold:
+            table.append(0)
+        else:
+            table.append(1)
+    return table
 
-    img_result = img
-    for i in range(rows):
-        for j in range(cols):
-            if sumNei(img, i, j) < 3:
-                img_result[i, j] = 0
+def remove_noise_pixel(img, noise_list):
 
-    plt.imshow(img, cmap='gray')
-    plt.show()
+    for item in noise_list:
+        img.putpixel((item[0], item[1]), 1)
 
-# def removeNoise(imgArray):
 
 def sumNei(img, x, y):
 
     curPixel = img.getpixel((x, y))
+
     width = img.width
     height = img.height
 
-    if curPixel==0: # white
+    if curPixel==1: # white
         return 0
 
-    if y == 0:      # 1st row
-        if x==0:    # topleft corner
+    if y == 0:  # 第一行
+        if x == 0:  # 左上顶点,4邻域
+            # 中心点旁边3个点
             sum = curPixel \
-                + img.getpixel((x, y+1)) \
-                + img.getpixel((x+1, y)) \
-                + img.getpixel((x+1, y+1))
-            return 4-sum
-
-        elif x == width - 1:    #bottomright corner
+                  + img.getpixel((x, y + 1)) \
+                  + img.getpixel((x + 1, y)) \
+                  + img.getpixel((x + 1, y + 1))
+            return 4 - sum
+        elif x == width - 1:  # 右上顶点
             sum = curPixel \
-                + img.getpixel((x, y+1)) \
-                + img.getpixel((x-1, y)) \
-                + img.getpixel((x-1, y+1))
-            return 4-sum
-        else:
-            sum = img.getpixel((x-1, y)) \
-                + img.getpixel((x-1, y+1)) \
-                + curPixel \
-                + img.getpixel((x, y+1)) \
-                + img.getpixel((x+1, y)) \
-                + img.getpixel(x+1, y+1)
-            return 6-sum
-    elif y==height-1:       # bottom row
-        if x==0:            # bottomleft
+                  + img.getpixel((x, y + 1)) \
+                  + img.getpixel((x - 1, y)) \
+                  + img.getpixel((x - 1, y + 1))
+
+            return 4 - sum
+        else:  # 最上非顶点,6邻域
+            sum = img.getpixel((x - 1, y)) \
+                  + img.getpixel((x - 1, y + 1)) \
+                  + curPixel \
+                  + img.getpixel((x, y + 1)) \
+                  + img.getpixel((x + 1, y)) \
+                  + img.getpixel((x + 1, y + 1))
+            return 6 - sum
+    elif y == height - 1:  # 最下面一行
+        if x == 0:  # 左下顶点
+            # 中心点旁边3个点
             sum = curPixel \
-                + img.getpixel((x+1, y)) \
-                + img.getpixel((x+1, y-1)) \
-                + img.getpixel((x, y-1))
-            return 4-sum
-
-        elif x == width-1:  # bottomright
+                  + img.getpixel((x + 1, y)) \
+                  + img.getpixel((x + 1, y - 1)) \
+                  + img.getpixel((x, y - 1))
+            return 4 - sum
+        elif x == width - 1:  # 右下顶点
             sum = curPixel \
-                + img.getpixel((x, y-1)) \
-                + img.getpixel((x-1, y)) \
-                + img.getpixel((x, y-1))
-            return 4-sum
-        else:
+                  + img.getpixel((x, y - 1)) \
+                  + img.getpixel((x - 1, y)) \
+                  + img.getpixel((x - 1, y - 1))
+
+            return 4 - sum
+        else:  # 最下非顶点,6邻域
             sum = curPixel \
-                + img.getpixel((x-1, y)) \
-                + img.getpixel((x+1, y)) \
-                + img.getpixel((x, y-1)) \
-                + img.getpixel((x-1, y-1)) \
-                + img.getpixel((x+1, y-1))
-            return 6-sum
+                  + img.getpixel((x - 1, y)) \
+                  + img.getpixel((x + 1, y)) \
+                  + img.getpixel((x, y - 1)) \
+                  + img.getpixel((x - 1, y - 1)) \
+                  + img.getpixel((x + 1, y - 1))
+            return 6 - sum
+    else:  # y不在边界
+        if x == 0:  # 左边非顶点
+            sum = img.getpixel((x, y - 1)) \
+                  + curPixel \
+                  + img.getpixel((x, y + 1)) \
+                  + img.getpixel((x + 1, y - 1)) \
+                  + img.getpixel((x + 1, y)) \
+                  + img.getpixel((x + 1, y + 1))
 
-    else:
-        if x==0:    # left edge
-            sum = img.getpixel((x, y-1)) \
-                + curPixel \
-                + img.getpixel((x, y+1)) \
-                + img.getpixel((x+1, y-1)) \
-                + img.getpixel((x+1, y)) \
-                + img.getpixel((x+1, y+1))
-            return 6-sum
+            return 6 - sum
+        elif x == width - 1:  # 右边非顶点
+            # print('%s,%s' % (x, y))
+            sum = img.getpixel((x, y - 1)) \
+                  + curPixel \
+                  + img.getpixel((x, y + 1)) \
+                  + img.getpixel((x - 1, y - 1)) \
+                  + img.getpixel((x - 1, y)) \
+                  + img.getpixel((x - 1, y + 1))
 
-        elif x == width - 1:    # right edge
-            sum = img.getpixel((x, y-1)) \
-                + curPixel \
-                + img.getpixel((x, y+1)) \
-                + img.getpixel((x-1, y-1)) \
-                + img.getpixel((x-1, y)) \
-                + img.getpixel((x-1, y+1))
-            return 6-sum
+            return 6 - sum
+        else:  # 具备9领域条件的
+            sum = img.getpixel((x - 1, y - 1)) \
+                  + img.getpixel((x - 1, y)) \
+                  + img.getpixel((x - 1, y + 1)) \
+                  + img.getpixel((x, y - 1)) \
+                  + curPixel \
+                  + img.getpixel((x, y + 1)) \
+                  + img.getpixel((x + 1, y - 1)) \
+                  + img.getpixel((x + 1, y)) \
+                  + img.getpixel((x + 1, y + 1))
+            return 9 - sum
 
-        else:
-            sum = img.getpixel((x-1, y-1)) \
-                + img.getpixel((x-1, y)) \
-                + img.getpixel((x-1, y+1)) \
-                + img.getpixel((x, y-1)) \
-                + curPixel \
-                + img.getpixel((x, y+1)) \
-                + img.getpixel((x+1, y-1)) \
-                + img.getpixel((x+1, y)) \
-                + img.getpixel((x+1, y+1))
-            return 9-sum
 
 if __name__ == '__main__':
 
-    img = Image.open(img_path).convert('L')
 
-    binImage(img_path)
+    count = 0
+
+    names = os.listdir(file_origin)
+
+    """
+    fileNum = names[0][:-9]
+
+    img = Image.open('./VerPic/' + names[0]).convert('L')
+    binImg= binImage(img)
+
+    binImg.show()
+
+    file_dest = "./BinPic/" + fileNum + "image.jpg"
+    binImg.save(file_dest)
+    """
+
+
+    for file in names:
+        fileNum = file[:-9]
+        info = "handle " + str(count+1) + "pic: " + fileNum
+        print(info)
+
+        img = Image.open('./VerPic/' + file).convert('L')
+
+        binImg = binImage(img)
+
+        file_dest = "./BinPic/" + fileNum + "image.jpg"
+        binImg.save(file_dest)
+        count += 1
+
+
+
