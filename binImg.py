@@ -141,18 +141,6 @@ if __name__ == '__main__':
 
     names = os.listdir(file_origin)
 
-    """
-    fileNum = names[0][:-9]
-
-    img = Image.open('./VerPic/' + names[0]).convert('L')
-    binImg= binImage(img)
-
-    binImg.show()
-
-    file_dest = "./BinPic/" + fileNum + "image.jpg"
-    binImg.save(file_dest)
-    """
-
 
     for file in names:
         fileNum = file[:-9]
