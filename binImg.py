@@ -1,6 +1,4 @@
 from PIL import Image
-import numpy as np
-import matplotlib.pyplot as plt
 import os
 
 img_path = './verPic/1image.jpg'
