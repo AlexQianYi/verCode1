@@ -85,3 +85,51 @@ def covert_imgs2feature_file(dig, svm_feature_file, img_folder):
 
     for file in FileList:
         img = Image.open(img_folder + '/' + file)
+        DifList = get_featrue(img)
+
+        Line = conver_values2str(dig, DifList)
+        svm_feature_file.write(line)
+        svm_feature_file.write('\n')
+
+def convert_values_to_str(dig, dif_list):
+    """
+    convert features string to input of svm
+
+    :param dig:
+    :param dif_list:
+    :return:
+    """
+
+    index = 1
+    line = '%d' % dig
+
+    for item in dif_list:
+        fmt = ' %d:%d '% (index, item)
+        line += fmt
+        index += 1
+
+
+    return line
+
+
+def convert_feature2vector(feature_list):
+
+    """
+
+    :param feature_list:
+    :return:
+    """
+
+    index = 1
+    xtVector = []
+    feature_dict = {}
+
+    for item in feature_list:
+
+        feature_dict[index] = item
+        index += 1
+    xtVector.append(feature_dict)
+    return xtVector
+
+if __name__ == '__main__':
+    
