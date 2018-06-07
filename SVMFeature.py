@@ -42,6 +42,46 @@ def get_featrue(img):
 def get_svm_train_txt():
 
     """
-    get
-    
+    get feature file of test dataset
+
     """
+
+    SVMFeatureFile = open(TrainFileName, 'w')
+
+    LabelList = ['0', '1', '2', '3']
+
+    for i in range(len(LabelList)):
+        ImgFolder = join(CutPicFolder, str(i))
+        CovertImgs2FeatureFile(i, SVMFeatureFile, ImgFolder)
+
+
+    SaveFeatureFile.close()
+
+
+def get_svm_test_txt():
+
+    """
+    get test file
+    :return:
+    """
+
+    ImgFolder = TestCutPicFolder
+    TestFile = open(TestFeatureFile, 'w')
+
+
+def covert_imgs2feature_file(dig, svm_feature_file, img_folder):
+    """
+
+    covert img in img_folder to feature file
+    :param dig: check number
+    :param svm_feature_file: svm feature file
+    :param img_folder:
+    :return:
+    """
+
+
+    FileList = os.listdir(img_folder)
+
+
+    for file in FileList:
+        img = Image.open(img_folder + '/' + file)
