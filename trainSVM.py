@@ -2,3 +2,18 @@ from lib.svm import svm_problem, svm_parameter
 
 from lib.svmutil import *
 
+def svm_model_train():
+
+    """
+    use image feature file to train model
+    :return:
+    """
+
+    y, x = svm_read_problem('./Feature.txt')
+
+    model = svm_train(y, x)
+    svm_save_model('./SVMmodel', model)
+
+
+if __name__ == '__main__':
+    svm_save_model()
