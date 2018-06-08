@@ -1,6 +1,6 @@
-from lib.svm import svm_problem, svm_parameter
 
-from lib.svmutil import *
+from libsvm.python.svm import svm_problem, svm_parameter
+from libsvm.python.svmutil import *
 
 def svm_model_train():
 
