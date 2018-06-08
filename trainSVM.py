@@ -12,7 +12,9 @@ def svm_model_train():
     y, x = svm_read_problem('./Feature.txt')
 
     model = svm_train(y, x)
-    svm_save_model('./SVMmodel', model)
+    print('a')
+    svm_save_model('./SVMmodel/svm_model', model)
+    print('save')
 
 
 if __name__ == '__main__':
