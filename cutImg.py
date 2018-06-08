@@ -15,7 +15,7 @@ def get_children_img(img):
 
     return ChildImgList
 
-def save_children_img(path, ChildImgList):
+def save_children_img(path, ChildImgList, ImgDest):
 
     FullFileName = os.path.basename(path)
     FullFileNameSplit = FullFileName.split('.')
@@ -24,7 +24,7 @@ def save_children_img(path, ChildImgList):
     i = 0
     for ChildImg in ChildImgList:
         CutImgFileName = FileName + '-' + ("%s.jpg" % i)
-        ChildImg.save("./CutPic/" + CutImgFileName)
+        ChildImg.save(ImgDest + CutImgFileName)
 
         i+=1
 
@@ -42,7 +42,7 @@ if __name__ == "__main__" :
         img = Image.open('./BinPic/' + file).convert('L')
 
         ChildImgList = get_children_img(img)
-        save_children_img(fileNum, ChildImgList)
+        save_children_img(fileNum, ChildImgList, './CutPic/')
 
         count += 1
 
