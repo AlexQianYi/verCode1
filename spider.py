@@ -5,7 +5,7 @@ import requests
 download dataset
 """
 
-def downimage(i):
+def downimage(i, FileDes):
     # 构建session
     sess = requests.Session()
     # 建立请求头
@@ -16,11 +16,11 @@ def downimage(i):
     # 获取响应图片内容
     image = sess.get(url, headers=headers).content
     # 保存到本地
-    with open("./VerPic/" + str(i) + "image.jpg", "wb") as f:
+    with open(FileDes, "wb") as f:
         f.write(image)
 
 
 if __name__ == "__main__":
     for i in range(1000):
         print('正在下载: ',i+1)
-        downimage(i)
+        downimage(i, "./VerPic/" + str(i) + "image.jpg")
