@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3f9d249-9168-4668-815e-918312743bd9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/trainSVM.py" afterPath="$PROJECT_DIR$/trainSVM.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/svm.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/svmutil.py" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -50,7 +52,7 @@
       <file leaf-file-name="SVMFeature.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SVMFeature.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7">
+            <state relative-caret-position="323">
               <caret line="111" column="0" lean-forward="false" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -65,8 +67,8 @@
       <file leaf-file-name="trainSVM.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/trainSVM.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+            <state relative-caret-position="95">
+              <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding>
                 <element signature="e#1#57#0" expanded="true" />
               </folding>
@@ -74,36 +76,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="svm.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/svm.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7">
-              <caret line="86" column="33" lean-forward="false" selection-start-line="86" selection-start-column="33" selection-end-line="86" selection-end-column="33" />
-              <folding>
-                <element signature="e#23#43#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="svmutil.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/svmutil.py">
+        <entry file="file://$PROJECT_DIR$/libsvm/python/svmutil.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7">
-              <caret line="252" column="52" lean-forward="false" selection-start-line="252" selection-start-column="52" selection-end-line="252" selection-end-column="52" />
-              <folding>
-                <element signature="e#23#32#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="76">
+              <caret line="4" column="5" lean-forward="false" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -171,7 +149,13 @@
             <path>
               <item name="verCode1" type="b2602c69:ProjectViewProjectNode" />
               <item name="verCode1" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="libsvm" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="verCode1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="verCode1" type="462c0819:PsiDirectoryNode" />
+              <item name="libsvm" type="462c0819:PsiDirectoryNode" />
+              <item name="python" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -364,19 +348,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SVMFeature.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7">
-          <caret line="111" column="0" lean-forward="false" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#88#795#0" expanded="false" />
-            <element signature="e#841#1109#0" expanded="false" />
-            <element signature="e#1141#2654#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-7">
@@ -405,9 +376,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-7">
           <caret line="86" column="33" lean-forward="false" selection-start-line="86" selection-start-column="33" selection-end-line="86" selection-end-column="33" />
-          <folding>
-            <element signature="e#23#43#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -415,9 +384,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-7">
           <caret line="252" column="52" lean-forward="false" selection-start-line="252" selection-start-column="52" selection-end-line="252" selection-end-column="52" />
-          <folding>
-            <element signature="e#23#32#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -429,10 +396,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/trainSVM.py">
+    <entry file="file://$PROJECT_DIR$/SVMFeature.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="111" column="0" lean-forward="false" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#88#795#0" expanded="false" />
+            <element signature="e#841#1109#0" expanded="false" />
+            <element signature="e#1141#2654#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libsvm/python/svmutil.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
-          <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+          <caret line="4" column="5" lean-forward="false" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trainSVM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding>
             <element signature="e#1#57#0" expanded="true" />
           </folding>
