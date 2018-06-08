@@ -72,6 +72,9 @@ def handle_train_file():
 
     TrainFolder = os.listdir('./ClassPic')
 
+    SVMFeatureFile = './Feature.txt'
+    SVMFeatureFileHandle = open(SVMFeatureFile, 'w')
+
     Label = {'0':0, '1':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, \
              'a':10, 'a1':11, 'b':12, 'b1':13, 'c':14, 'c1':15, 'd':16, 'd1':17, 'e':18, 'e1':19, \
              'f':20, 'f1':21, 'g':22, 'g1':23, 'h':24, 'h1':25, 'i':26, 'i1':27, 'j':28, 'j1':29, \
@@ -95,8 +98,10 @@ def handle_train_file():
                     PixlCountList = get_featrue(img)
 
                     LabelImg = Label[folder]
-
                     Line = convert_values2str(LabelImg, PixlCountList)
+
+                    SVMFeatureFileHandle.write(Line)
+                    SVMFeatureFileHandle.write('\n')
 
 
                     print(Line)
