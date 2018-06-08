@@ -2,8 +2,8 @@
 
 import os
 import sys
-from svm import *
-from svm import __all__ as svm_all
+from libsvm.python.svm import *
+from libsvm.python.svm import __all__ as svm_all
 
 
 __all__ = ['evaluations', 'svm_load_model', 'svm_predict', 'svm_read_problem',

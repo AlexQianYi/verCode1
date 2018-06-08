@@ -16,4 +16,4 @@ def svm_model_train():
 
 
 if __name__ == '__main__':
-    svm_save_model()
+    svm_model_train()
