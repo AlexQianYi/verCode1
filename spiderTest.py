@@ -14,8 +14,8 @@ if __name__ == "__main__":
     Download i test images in file Test/OriginPic
     """
     for i in range(TestPicNum):
-        downimage(i, ".Test/OriginPic/" + str(i) + "image.jpg")
-        print('Download test image: ' + str(i) + 'in Test/OriginPic')
+        downimage(i, "./Test/OriginPic/" + str(i) + "image.jpg")
+        print('Download test image: ' + str(i) + ' in Test/OriginPic')
     print('------------------------------------------------------')
     print('--------------------Download Finish-------------------')
     print('------------------------------------------------------')
@@ -25,7 +25,7 @@ if __name__ == "__main__":
     get Binary version of images
     """
     images = os.listdir('./Test/OriginPic')
-    BinImgDes = './Test/BinImg/'
+    BinImgDes = './Test/BinPic/'
     count1 = 0
     for file in images:
         imgName = file[:-9]
@@ -45,9 +45,9 @@ if __name__ == "__main__":
     Cut Images to 5
     """
 
-    BinImage = os.listdir('./Test/BinImg')
+    BinImage = os.listdir('./Test/BinPic')
     count2 = 0
-    CutImgDes = './Test/CutImg/'
+    CutImgDes = './Test/CutPic/'
     for file in BinImage:
         imgNum = file[:-9]
         print('Cut image: ' + imgName + ' No.' + str(count2))
@@ -55,7 +55,7 @@ if __name__ == "__main__":
         img = Image.open('./BinPic/' + file)
 
         ChildImgList = get_children_img(img)
-        save_children_img(fileNum, ChildImgList, CutImgDes)
+        save_children_img(imgNum, ChildImgList, CutImgDes)
 
         count2 += 1
     print('------------------------------------------------------')
@@ -63,7 +63,7 @@ if __name__ == "__main__":
     print('------------------------------------------------------')
     print('------------------Generate SVM Vector-----------------')
 
-    
+
 
 
 
