@@ -41,7 +41,6 @@ def get_featrue(img):
 
     return PixelCountList
 
-
 def convert_values2str(dig, dif_list):
     """
     convert features string to input of svm
@@ -89,7 +88,6 @@ def handle_train_file():
         else:
             ClassFolder = os.listdir('./ClassPic/'+folder)
 
-            print(folder)
             for file in ClassFolder:
                 if file == '.DS_Store':
                     continue
@@ -104,7 +102,44 @@ def handle_train_file():
                     SVMFeatureFileHandle.write('\n')
 
 
-                    print(Line)
+def handle_test_file():
+    """
+
+    :return:
+    """
+    Label = {'0':0, '1':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, \
+             'a':10, 'a1':11, 'b':12, 'b1':13, 'c':14, 'c1':15, 'd':16, 'd1':17, 'e':18, 'e1':19, \
+             'f':20, 'f1':21, 'g':22, 'g1':23, 'h':24, 'h1':25, 'i':26, 'i1':27, 'j':28, 'j1':29, \
+             'k':30, 'k1':31, 'l':32, 'l1':33, 'm':34, 'm1':35, 'n':36, 'n1':37, 'o':38, 'o1':39, \
+             'p':40, 'p1':41, 'q':42, 'q1':43, 'r':44, 'r1':45, 's':46, 's1':47, 't':48, 't1':49, \
+             'u':50, 'u1':51, 'v':52, 'v1':53, 'w':54, 'w1':55, 'x':56, 'x1':57, 'y':58, 'y1':59, \
+             'z':60, 'z1':61}
+
+    TestFolder = os.listdir('./Test/ClassPic')
+
+    SVMFeatureFile = './Test/Feature.txt'
+    SVMFeatureFileHandle = open(SVMFeatureFile, 'w')
+
+    for folder in TestFolder:
+        if folder == '.DS_Store':
+            continue
+        else:
+            ClassFolder = os.listdir('./Test/ClassPic/'+folder)
+
+            for file in ClassFolder:
+                if file == '.DS_Store':
+                    continue
+                else:
+                    img = Image.open('./Test/ClassPic/' + folder +'/' + file)
+                    PixlCountList = get_featrue(img)
+
+                    LabelImg = Label[folder]
+                    Line = convert_values2str(LabelImg, PixlCountList)
+
+                    SVMFeatureFileHandle.write(Line)
+                    SVMFeatureFileHandle.write('\n')
+
+
 
 if __name__ == '__main__':
 
